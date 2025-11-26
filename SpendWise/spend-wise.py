@@ -3,7 +3,7 @@ print("if you want to stop entering type: stop")
 
 income = int(input("Enter your monthly income: "))
 
-after_bill = income
+after_bill = 0
 
 bills_list = []
 
@@ -11,7 +11,7 @@ nameB = None
 
 amountB = None
 
-while income != 0 :
+while True :
     bills = input("Enter the name of your bill and how much it is: ").lower()
     if bills == "stop":
         break 
@@ -27,11 +27,14 @@ while income != 0 :
 
     if nameB.isalpha() and amountB.isdigit() :
         amountB = int(amountB)
-        after_bill -= amountB
+        after_bill += amountB
         
     else:
         print("Invalid input. please enter a valid bill name and amount.")
         continue
+        
+    if income <= 0:
+        break
     
     bills_list.append(bills)
 
@@ -41,11 +44,9 @@ spending = (after_bill / income ) * 100
 for i in bills_list:
     print(i)
 
-if income == after_bill:
-    print("You don't have any bills!")
-elif spending > 80:
-    print("You are spending more than 80% of your income!")
+if income < after_bill:
+    print("YOU SPEND MORE THAN YOUR INCOME!")
 else:
     print(f"You are spending {spending:.2f}% of your income.")
 
-print("Money left after bills:", after_bill)
+print("Money spend:", after_bill)
